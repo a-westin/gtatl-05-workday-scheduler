@@ -10,19 +10,19 @@ $(document).ready(function () {
   // For loop to create what will display on the calendar
   for (var i = 0; i < workday.length; i++) {
     var timeBlock = $("<div>").addClass("row");
-    var hourBlock = $("<div>").addClass("hour");
-    var textArea = $("<textarea>");
-    textArea.text(localStorage.getItem(hours[i]));
+    var hourBlock = $("<div>").addClass("hour col-md-1");
+    var textArea = $("<textarea>").addClass("col-md-12");
+    textArea.text(localStorage.getItem(workday[i]));
 
-    if (currentHour == hours[i]) {
+    if (currentHour == workday[i]) {
       textArea.addClass("present");
-    } else if (currentHour < hours[i]) {
+    } else if (currentHour < workday[i]) {
       textArea.addClass("past");
-    } else if (currentHour > hours[i]) {
+    } else if (currentHour > workday[i]) {
       textArea.addClass("future");
     }
     var saveBtn = $("<button>").addClass("saveBtn");
-    timeBlock.append(hour, textArea, saveBtn);
+    timeBlock.append(hourBlock, textArea, saveBtn);
     timeblockContainer.append(timeBlock);
   }
 });
