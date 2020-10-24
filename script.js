@@ -9,9 +9,9 @@ $(document).ready(function () {
 
   // For loop to create what will display on the calendar
   for (var i = 0; i < workday.length; i++) {
-    var timeBlock = $("<div>").addClass("row");
+    var timeBlock = $("<div>").addClass("row time-block");
     var hourBlock = $("<div>").addClass("hour col-md-1");
-    var textArea = $("<textarea>").addClass("col-md-12");
+    var textArea = $("<textarea>").addClass("col-md-10");
     textArea.text(localStorage.getItem(workday[i]));
 
     if (currentHour == workday[i]) {
@@ -21,7 +21,7 @@ $(document).ready(function () {
     } else if (currentHour > workday[i]) {
       textArea.addClass("future");
     }
-    var saveBtn = $("<button>").addClass("saveBtn");
+    var saveBtn = $("<button>").addClass("saveBtn col-md-1");
     timeBlock.append(hourBlock, textArea, saveBtn);
     timeblockContainer.append(timeBlock);
   }
