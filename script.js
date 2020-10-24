@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
   // Defining variables
   var workday = [
     { time: "9 a.m.", event: "" },
@@ -24,7 +24,7 @@ $(document).ready(function () {
       '<div class="time-block" id="' +
       index +
       '"><div class="row no-gutters input-group"><div class="col-sm col-lg-1 input-group-prepend hour justify-content-sm-end pr-3 pt-3">' +
-      timeLabel +
+      timeTag +
       '</div><textarea class="form-control ' +
       blockColor +
       '">' +
@@ -32,11 +32,12 @@ $(document).ready(function () {
       '</textarea><div class="col-sm col-lg-1 input-group-append"><button class="saveBtn btn-block" type="submit"><i class="fas fa-save"></i></button></div></div></div>';
 
     $(".container").append(row);
+    console.log(index);
   });
 
   // Determine the color of rows based on what time it currently is
   function rowColor(time) {
-    var todoNow = moment(now, "h a");
+    var todoNow = moment(currentHour, "h a");
     var todoFuture = moment(time, "h a");
 
     if (todoNow.isBefore(todoFuture) === true) {
@@ -48,22 +49,35 @@ $(document).ready(function () {
     }
   }
 
-  // For loop to create what will display on the calendar
-  // for (var i = 0; i < workday.length; i++) {
-  //   var timeBlock = $("<div>").addClass("row time-block");
-  //   var hourBlock = $("<div>").addClass("hour col-md-1");
-  //   var textArea = $("<textarea>").addClass("col-md-10");
-  //   textArea.text(localStorage.getItem(workday[i]));
+  // Saving entries and adding them to local storage
+  $(".saveButton").on("click", function () {
+    var timeblockID = parseInt($(this).closest(".time-block").attr("id"));
+    var plannerEntry = $.trim($(this).parent().siblings("textarea").val());
+    workday[timeblockID].event = plannerEntry;
 
-  //   if (currentHour == workday[i]) {
-  //     textArea.addClass("present");
-  //   } else if (currentHour < workday[i]) {
-  //     textArea.addClass("past");
-  //   } else if (currentHour > workday[i]) {
-  //     textArea.addClass("future");
-  //   }
-  //   var saveBtn = $("<button>").addClass("saveBtn col-md-1");
-  //   timeBlock.append(hourBlock, textArea, saveBtn);
-  //   timeblockContainer.append(timeBlock);
-  // }
+    var plannerEvents = JSON.parse(localStorage.getItem("workDay"));
+    if (plannerEvents) {
+      workday = plannerEvents;
+    }
+    localStorage.setItem("workDay", JSON.stringify(workday));
+  });
 });
+
+// For loop to create what will display on the calendar
+// for (var i = 0; i < workday.length; i++) {
+//   var timeBlock = $("<div>").addClass("row time-block");
+//   var hourBlock = $("<div>").addClass("hour col-md-1");
+//   var textArea = $("<textarea>").addClass("col-md-10");
+//   textArea.text(localStorage.getItem(workday[i]));
+
+//   if (currentHour == workday[i]) {
+//     textArea.addClass("present");
+//   } else if (currentHour < workday[i]) {
+//     textArea.addClass("past");
+//   } else if (currentHour > workday[i]) {
+//     textArea.addClass("future");
+//   }
+//   var saveBtn = $("<button>").addClass("saveBtn col-md-1");
+//   timeBlock.append(hourBlock, textArea, saveBtn);
+//   timeblockContainer.append(timeBlock);
+// }
