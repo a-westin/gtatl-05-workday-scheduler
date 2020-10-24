@@ -10,7 +10,7 @@ I think this app could be improved upon by making it a weekly or monthly calende
 
 ## Screencast of functioning application
 
-(<iframe src="https://drive.google.com/file/d/12jgJ0IIfJVfMgPBRrmLaFeITk1STJWeQ/preview" width="640" height="480"></iframe>)
+![Work Day Scheduler](https://user-images.githubusercontent.com/69770137/97091389-a85b3b00-1609-11eb-9bd9-42c18c7d749f.gif)
 
 
 #### Credits
