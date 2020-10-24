@@ -34,6 +34,20 @@ $(document).ready(function () {
     $(".container").append(row);
   });
 
+  // Determine the color of rows based on what time it currently is
+  function rowColor(time) {
+    var todoNow = moment(now, "h a");
+    var todoFuture = moment(time, "h a");
+
+    if (todoNow.isBefore(todoFuture) === true) {
+      return "future";
+    } else if (todoNow.isAfter(todoFuture) === true) {
+      return "past";
+    } else {
+      return "present";
+    }
+  }
+
   // For loop to create what will display on the calendar
   // for (var i = 0; i < workday.length; i++) {
   //   var timeBlock = $("<div>").addClass("row time-block");
